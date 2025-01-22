@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Development",
+            "type": "shell",
+            "dependsOn": [
+                "Create VENV",
+                "Configure VENV",
+                "Configure PATH",
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Create VENV",
+            "type": "shell",
+            "windows": {"command": "New-Item -Path '.env' -ItemType 'file' -Value '' -Force"},
+            "osx": {"command": "touch .env"}
+        },
+        {
+            "label": "Configure VENV",
+            "type": "shell",
+            "windows": {"command": "python -m venv .venv; .venv/Scripts/activate; python -m pip install --upgrade pip; pip install -r requirements.txt"},
+            "osx": {"command": "python3 -m venv .venv; source .venv/bin/activate; python3 -m pip install --upgrade pip; pip install -r requirements.txt"}
+        },
+        {
+            "label": "Configure PATH",
+            "type": "shell",
+            "windows": {"command": "New-Item -Path .venv/Lib/site-packages/main.pth -ItemType file -Value $(Join-Path -Path $(pwd) -ChildPath 'source') -Force"},
+            "osx": {"command": "echo $(pwd)/source > .venv/lib/python3.12/site-packages/main.pth"}
+        }
+    ]
+}

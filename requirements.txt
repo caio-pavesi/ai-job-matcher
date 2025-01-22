@@ -1,0 +1,9 @@
+# Needed
+pytest
+python-decouple
+
+# Most likely needed
+pandas
+openpyxl
+ipykernel
+sqlalchemy

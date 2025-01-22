@@ -1,0 +1,11 @@
+{
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "pylint.args": [
+        "--disable=C0301",
+        "--disable=W0719",
+        "--disable=W0718",
+        "--disable=W1203",
+        "--init-hook=import sys; sys.path.append('source')",
+    ]
+}

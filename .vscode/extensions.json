@@ -1,0 +1,18 @@
+{
+    "recommendations": [
+        "github.copilot",
+        "ms-python.python",
+        "ms-python.pylint",
+        "ms-python.debugpy",
+        "ms-python.autopep8",
+        "ms-toolsai.jupyter",
+        "qwtel.sqlite-viewer",
+        "hediet.vscode-drawio",
+        "njpwerner.autodocstring",
+        "ms-toolsai.datawrangler",
+        "ms-python.vscode-pylance",
+        "aaron-bond.better-comments",
+        "chdsbd.python-inline-sql-syntax",
+        "visualstudioexptteam.vscodeintellicode"
+    ]
+}
