@@ -31,7 +31,7 @@
             "label": "Configure PATH",
             "type": "shell",
             "windows": {"command": "New-Item -Path .venv/Lib/site-packages/main.pth -ItemType file -Value $(Join-Path -Path $(pwd) -ChildPath 'source') -Force"},
-            "osx": {"command": "echo $(pwd)/source > .venv/lib/python3.12/site-packages/main.pth"}
+            "osx": {"command": "echo $(pwd)/source > .venv/lib/python3.11/site-packages/main.pth"}
         }
     ]
 }
