@@ -32,3 +32,5 @@ def if_not_dev(dev_false: any, dev_true: any) -> any:
 
 # Project directory
 BASE_DIR = Path(__file__).parent.parent.resolve()
+
+GITHUB_TOKEN = config('GITHUB_TOKEN', default = None)
