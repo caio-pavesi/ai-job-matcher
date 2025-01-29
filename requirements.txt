@@ -1,5 +1,8 @@
 bs4
 requests
+ipywidgets
+transformers
+torch
 
 # Needed
 pytest
