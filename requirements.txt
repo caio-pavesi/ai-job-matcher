@@ -3,6 +3,7 @@ requests
 ipywidgets
 transformers
 torch
+azure-ai-inference
 
 # Needed
 pytest
