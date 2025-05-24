@@ -4,6 +4,7 @@ ipywidgets
 transformers
 torch
 azure-ai-inference
+ollama
 
 # Needed
 pytest
