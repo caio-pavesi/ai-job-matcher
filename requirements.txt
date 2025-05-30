@@ -5,6 +5,7 @@ transformers
 torch
 azure-ai-inference
 ollama
+unstructured
 
 # Needed
 pytest
