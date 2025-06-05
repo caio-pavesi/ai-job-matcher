@@ -1,6 +1,6 @@
 """"Defines the types used"""
 
-from typing import List, Literal
+from typing import List, Literal, TypedDict
 
 JobFilterType = Literal[
     'jobType_INTERNSHIP',
@@ -42,3 +42,12 @@ JobFilterType = Literal[
 ]
 
 JobFilter = List[JobFilterType]
+
+class ApplicationRating(TypedDict):
+    """Rating information for a job."""
+    score: float
+    strengths: str
+    weaknesses: str
+    improvement: str
+    conclusion: str
+    interview: bool
