@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS jobs (
     job_page_source TEXT,
     job_title TEXT,
     job_description TEXT,
+    job_posting_date DATE,
     job_type TEXT,
     job_field TEXT,
     job_city TEXT
