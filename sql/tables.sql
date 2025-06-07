@@ -14,11 +14,11 @@ CREATE TABLE IF NOT EXISTS jobs (
 CREATE TABLE IF NOT EXISTS matches (
     id INTEGER PRIMARY KEY,
     job_portal_id INTEGER,
-    score FLOAT,
-    strengths TEXT,
-    weaknesses TEXT,
-    improvement TEXT,
-    conclusion TEXT,
-    interview TEXT,
+    match_score FLOAT,
+    match_strengths TEXT,
+    match_weaknesses TEXT,
+    match_improvement_points TEXT,
+    match_conclusions TEXT,
+    match_possible_interview BOOLEAN,
     FOREIGN KEY (job_portal_id) REFERENCES jobs(job_portal_id)
 );
