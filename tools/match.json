@@ -1,0 +1,23 @@
+{
+    "name": "assess_candidate_fit",
+    "description": "Evaluates candidate fit against job description and returns structured assessment.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "match_score": {"type": "number"},
+            "match_strengths": {"type": "string"},
+            "match_weaknesses": {"type": "string"},
+            "match_improvement_points": {"type": "string"},
+            "match_conclusions": {"type": "string"},
+            "match_possible_interview": {"type": "boolean"}
+        },
+        "required": [
+            "match_score",
+            "match_strengths",
+            "match_weaknesses",
+            "match_improvement_points",
+            "match_conclusions",
+            "match_possible_interview"
+        ]
+    }
+}
