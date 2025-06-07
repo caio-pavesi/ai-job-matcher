@@ -1,5 +1,7 @@
-# Python software template
-This is a mock python software template which i mostly use to deploy python software
+# Ai job matching
+How do companies match the best candidates betwenn hundreds of them? Not manually!
 
-# References
-- [Prompt](https://chatgpt.com/share/6834a5db-ff20-8007-8d7c-8c88748b6b7c)
+## Objective
+With this repository you have a glance at an [automation](/source/etl.ipynb) that scraps a given job portal for all of the postings. Then it [compares](/source/match.ipynb) a given candidate application files (PDF's) with a job description using a OpenAi's API.
+
+This is an example only if you want to use with your use case (e.g other job portal you'll need to adapt the code for your needs)
