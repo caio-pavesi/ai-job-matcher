@@ -1,18 +1,10 @@
-bs4
-requests
-ipywidgets
-transformers
-torch
-azure-ai-inference
-ollama
-unstructured
-
-# Needed
-pytest
-python-decouple
-
-# Most likely needed
-pandas
-openpyxl
-ipykernel
-sqlalchemy
+requests==2.32.3
+pytest==8.4.0
+python-decouple==3.8
+pandas==2.3.0
+ipykernel==6.29.5
+beautifulsoup4==4.13.4
+langchain==0.3.25
+langchain_openai==0.3.21
+langchain_community==0.3.24
+pypdf==5.6.0
