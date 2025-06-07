@@ -2,7 +2,6 @@ CREATE TABLE IF NOT EXISTS jobs (
     id INTEGER PRIMARY KEY,
     job_portal_id INTEGER,
     job_link TEXT,
-    job_page_source TEXT,
     job_title TEXT,
     job_description TEXT,
     job_posting_date DATE,
