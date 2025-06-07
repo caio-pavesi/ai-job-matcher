@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS matches (
     FOREIGN KEY (job_portal_id) REFERENCES jobs(job_portal_id)
 );
 
-CREATE TABLE IF NOT EXISTS job_matches AS SELECT
+CREATE VIEW IF NOT EXISTS job_matches AS
+SELECT
     jobs.job_portal_id,
     jobs.job_link,
     jobs.job_title,
