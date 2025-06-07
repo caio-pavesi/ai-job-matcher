@@ -1,6 +1,12 @@
 """"Defines the types used"""
 
-from typing import List, Literal, TypedDict
+from langchain_core.documents import Document
+from typing import (
+    List,
+    Union,
+    Literal,
+    TypedDict,
+)
 
 JobFilterType = Literal[
     'jobType_INTERNSHIP',
@@ -43,11 +49,13 @@ JobFilterType = Literal[
 
 JobFilter = List[JobFilterType]
 
+Application = Union[Document, list[Document]]
+
 class ApplicationRating(TypedDict):
     """Rating information for a job."""
-    score: float
-    strengths: str
-    weaknesses: str
-    improvement: str
-    conclusion: str
-    interview: bool
+    match_score: float
+    match_strengths: str
+    match_weaknesses: str
+    match_improvement_points: str
+    match_conclusions: str
+    match_possible_interview: str
