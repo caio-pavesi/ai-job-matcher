@@ -22,3 +22,4 @@ Guidance so you use the market best-practices in your code
 19. [10 GitHub Repository Naming Best Practices](https://climbtheladder.com/10-github-repository-naming-best-practices/)
 20. [GitHub Repository Best Practices](https://dev.to/pwd9000/github-repository-best-practices-23ck)
 21. [GitHub Repository Structure Best Practices](https://medium.com/code-factory-berlin/github-repository-structure-best-practices-248e6effc405)
+22. [Writing good prompts](https://www.youtube.com/watch?v=Q2HxSfS6ADo)
