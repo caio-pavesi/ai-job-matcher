@@ -12,16 +12,23 @@ def get_job_page(link: str) -> str:
 
     return requests.get(link, timeout = 60).content.decode('utf-8')
 
-def get_job_description(job_page: str, class_wrapper) -> str:
+def get_job_description(link: str) -> str:
     """This function extracts the job description from the job page HTML, but keeps the formatting.
     Args:
         job_page (Html): The HTML content of the job page.
     Returns:
         str: The formatted job description as a html string."""
 
-    description =  BeautifulSoup(job_page, 'html.parser').find('div', class_ = class_wrapper)
+    content = get_job_page(link)
 
-    # Remove all attributes that are not needed since i just need the formatted HTML.
+    if link.startswith('https://www.bmwgroup.jobs/'):
+        description =  BeautifulSoup(content, 'html.parser').find('div', class_ = 'container-layout container no-top-spacing no-bottom-spacing')
+    elif link.startswith('https://jobs.porsche.com/'):
+        description =  BeautifulSoup(content, 'html.parser').find('article')
+    else:
+        pass
+
+    # Removing all attributes that are not needed since i just need the formatted HTML.
     for tag in description.find_all(True):
         if 'class' in tag.attrs:
             del tag.attrs['class']
