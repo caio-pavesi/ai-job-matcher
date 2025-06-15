@@ -25,8 +25,10 @@ def get_job_description(link: str) -> str:
         description =  BeautifulSoup(content, 'html.parser').find('div', class_ = 'container-layout container no-top-spacing no-bottom-spacing')
     elif link.startswith('https://jobs.porsche.com/'):
         description =  BeautifulSoup(content, 'html.parser').find('article')
+    elif link.startswith('https://jobs.ferrari.com/'):
+        description =  BeautifulSoup(content, 'html.parser').find('div', class_ = 'job')
     else:
-        pass
+        raise ValueError('Unsupported job page link.')
 
     # Removing all attributes that are not needed since i just need the formatted HTML.
     for tag in description.find_all(True):
