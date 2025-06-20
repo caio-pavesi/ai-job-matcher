@@ -3,6 +3,7 @@
 *.xlsm
 *.xls
 *.db
+secrets.toml
 
 # Directories
 */chroma
