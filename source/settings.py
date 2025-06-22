@@ -35,3 +35,4 @@ BASE_DIR = Path(__file__).parent.parent.resolve()
 
 GITHUB_TOKEN = config('GITHUB_TOKEN', default = None)
 OPENAI_API_KEY = config('OPENAI_API_KEY', default = None)
+SQLITECLOUD_CONNECTION_STRING = config('SQLITECLOUD_CONNECTION_STRING', default = None)
