@@ -7,6 +7,8 @@
             "match_score": {"type": "number"},
             "match_strengths": {"type": "string"},
             "match_weaknesses": {"type": "string"},
+            "match_opportunities": {"type": "string"},
+            "match_threats": {"type": "string"},
             "match_improvement_points": {"type": "string"},
             "match_conclusions": {"type": "string"},
             "match_possible_interview": {"type": "boolean"}
@@ -15,6 +17,8 @@
             "match_score",
             "match_strengths",
             "match_weaknesses",
+            "match_opportunities",
+            "match_threats",
             "match_improvement_points",
             "match_conclusions",
             "match_possible_interview"
