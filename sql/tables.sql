@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS jobs (
     id INTEGER PRIMARY KEY,
-    job_portal_id INTEGER,
+    job_portal_id INTEGER UNIQUE,
     job_link TEXT,
     job_title TEXT,
     job_description TEXT,
@@ -13,9 +13,12 @@ CREATE TABLE IF NOT EXISTS jobs (
 CREATE TABLE IF NOT EXISTS matches (
     id INTEGER PRIMARY KEY,
     job_portal_id INTEGER,
+    match_date DATE,
     match_score FLOAT,
     match_strengths TEXT,
     match_weaknesses TEXT,
+    match_opportunities TEXT,
+    match_threats TEXT,
     match_improvement_points TEXT,
     match_conclusions TEXT,
     match_possible_interview BOOLEAN,
@@ -32,9 +35,12 @@ SELECT
     jobs.job_type,
     jobs.job_field,
     jobs.job_city,
+    matches.match_date,
     matches.match_score,
     matches.match_strengths,
     matches.match_weaknesses,
+    matches.match_opportunities,
+    matches.match_threats,
     matches.match_improvement_points,
     matches.match_conclusions,
     matches.match_possible_interview
