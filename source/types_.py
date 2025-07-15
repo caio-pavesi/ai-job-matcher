@@ -59,3 +59,5 @@ class ApplicationRating(TypedDict):
     match_improvement_points: str
     match_conclusions: str
     match_possible_interview: str
+    job_portal_id: int
+    match_date: str
