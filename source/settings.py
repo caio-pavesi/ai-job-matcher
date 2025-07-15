@@ -17,7 +17,7 @@ APP_ID: int = None
 # Changes the settings if you are in project development
 DEV_MODE = True
 
-def if_not_dev(dev_false: any, dev_true: any) -> any:
+def if_not_dev(dev_false, dev_true):
     """Changes the settings if DEV_MODE is True
 
     Args:
@@ -33,6 +33,6 @@ def if_not_dev(dev_false: any, dev_true: any) -> any:
 # Project directory
 BASE_DIR = Path(__file__).parent.parent.resolve()
 
-GITHUB_TOKEN = config('GITHUB_TOKEN', default = None)
-OPENAI_API_KEY = config('OPENAI_API_KEY', default = None)
-SQLITECLOUD_CONNECTION_STRING = config('SQLITECLOUD_CONNECTION_STRING', default = None)
+GITHUB_TOKEN = str(config('GITHUB_TOKEN', default = None))
+OPENAI_API_KEY = str(config('OPENAI_API_KEY', default = None))
+SQLITECLOUD_CONNECTION_STRING = str(config('SQLITECLOUD_CONNECTION_STRING', default = None))
