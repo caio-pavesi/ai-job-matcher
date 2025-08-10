@@ -1,52 +1,49 @@
-"""Useful functions for the source package."""
+'''Utility functions'''
 
-import requests
-from bs4 import BeautifulSoup
+# Standard
+import logging
+from typing import Generator
 
-def get_job_page(link: str) -> str:
-    """Simply fetches the job page content from the given link.
-    Args:
-        link (str): The URL of the job page.
-    Returns:
-        str: The HTML content of the job page."""
+# Project
+from type import JobPosting
+from settings import SQLITECLOUD_CONNECTION_STRING
 
-    return requests.get(link, timeout = 60).content.decode('utf-8')
+# External
+import sqlalchemy as sql
 
-def get_job_description(link: str) -> str:
-    """This function extracts the job description from the job page HTML, but keeps the formatting.
-    Args:
-        job_page (Html): The HTML content of the job page.
-    Returns:
-        str: The formatted job description as a html string."""
+logging.basicConfig(level = logging.DEBUG)
+logger = logging.getLogger(__name__)
 
-    content = get_job_page(link)
+def already_inserted_in_database(job_link: str) -> bool:
+    '''Lorem ipsum'''
 
-    if link.startswith('https://www.bmwgroup.jobs/'):
-        description =  BeautifulSoup(content, 'html.parser').find('div', class_ = 'container-layout container no-top-spacing no-bottom-spacing')
-    elif link.startswith('https://jobs.porsche.com/'):
-        description =  BeautifulSoup(content, 'html.parser').find('article')
-    elif link.startswith('https://jobs.ferrari.com/'):
-        description =  BeautifulSoup(content, 'html.parser').find('div', class_ = 'job')
-    else:
-        raise ValueError('Unsupported job page link.')
+    engine = sql.create_engine(SQLITECLOUD_CONNECTION_STRING)
+    connection = engine.connect()
 
-    # Removing all attributes that are not needed since i just need the formatted HTML.
-    for tag in description.find_all(True):
-        if 'class' in tag.attrs:
-            del tag.attrs['class']
-        if 'itemprop' in tag.attrs:
-            del tag.attrs['itemprop']
-        if 'type' in tag.attrs:
-            del tag.attrs['type']
-        if 'href' in tag.attrs:
-            del tag.attrs['href']
-        if 'id' in tag.attrs:
-            del tag.attrs['id']
+    query = sql.text('''SELECT 1 FROM jobs WHERE job_link = :job_link''')
+    value = connection.execute(query, {'job_link': job_link}).fetchone()
 
-    return (
-        description.decode_contents()
-        .replace('\n', '')
-        .replace('\t', '')
-        .replace('\r', '')
-        .strip()
-    )
+    connection.close()
+    engine.dispose()
+
+    return value is not None
+
+def load(data: Generator[JobPosting, None, None]) -> bool:
+    '''Lorem ipsum'''
+
+    engine = sql.create_engine(SQLITECLOUD_CONNECTION_STRING)
+    connection = engine.connect()
+
+    query = sql.text('''INSERT INTO jobs (job_portal_id, job_link, job_title, job_description, job_posting_date, job_type, job_field, job_city) VALUES (:job_portal_id, :job_link, :job_title, :job_description, :job_posting_date, :job_type, :job_field, :job_city)''')
+
+    for job in data:
+        try:
+            connection.execute(query, job.json())
+            logger.debug('Inserted job: %s', job.job_portal_id)
+        except Exception:
+            logger.error('Error inserting job', exc_info = True)
+
+    connection.close()
+    engine.dispose()
+
+    return True
