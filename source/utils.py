@@ -1,12 +1,13 @@
 '''Utility functions'''
 
 # Standard
+import json
 import logging
 from typing import Generator
 
 # Project
 from type import JobPosting
-from settings import SQLITECLOUD_CONNECTION_STRING
+from settings import SQLITECLOUD_CONNECTION_STRING, BASE_DIR
 
 # External
 import sqlalchemy as sql
@@ -47,3 +48,19 @@ def load(data: Generator[JobPosting, None, None]) -> bool:
     engine.dispose()
 
     return True
+
+def stop_loop(iteration: int, limit: int) -> None:
+    '''Stops the loop if the iteration count reaches the limit, i dont want infinite loops or waste all my OPENAI credits because of them.
+    Args:
+        iteration (int): The current iteration count.
+        limit (int): The maximum number of iterations allowed.
+    Raises:
+        StopIteration: If the iteration count reaches the limit.'''
+
+    if iteration >= limit:
+        raise StopIteration("Reached the limit of iterations.")
+
+def llm_match_function() -> dict:
+    '''Schema for the match function.'''
+    with open(BASE_DIR / 'tools/match.json', 'r', encoding = 'utf-8') as file:
+        return json.load(file)
