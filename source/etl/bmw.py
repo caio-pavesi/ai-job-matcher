@@ -15,7 +15,7 @@ import requests as req
 from bs4 import BeautifulSoup as bs
 from bs4.element import Tag
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 URL = 'https://www.bmwgroup.jobs/en/_jcr_content/main/layoutcontainer_5337/jobfinder30.jobfinder_table.content.html?filterSearch=obType_INTERNSHIP,postingDate_7'
@@ -60,8 +60,8 @@ def get_job_link(html: Tag) -> str:
 def get_job_title(html: Tag) -> str:
     '''Lorem ipsum'''
 
-    value = cast(Tag, html.find('button', class_='grp-jobfinder__row-button'))
-    value = cast(str, value.get('aria-label'))
+    value = cast(Tag, html.find('div', class_='grp-jobfinder__cell-title'))
+    value = cast(str, value.text)
 
     return value
 
@@ -129,7 +129,7 @@ def transform(job_listing: Sequence[Tag]) -> Generator[JobPosting, None, None]:
     for job_data in job_listing:
 
         job_link = get_job_link(job_data)
-        logger.debug('Processing job link: %s', job_link)
+        logger.info('Processing job link: %s', job_link)
 
         if already_inserted_in_database(job_link):
             logger.debug('Job already inserted: %s', job_link)
