@@ -3,13 +3,14 @@
 # Standard
 import json
 import logging
-from typing import Generator
+from typing import Generator, Iterator, Hashable
 
 # Project
 from type import JobPosting
 from settings import SQLITECLOUD_CONNECTION_STRING, BASE_DIR
 
 # External
+import pandas as pd
 import sqlalchemy as sql
 
 logging.basicConfig(level = logging.DEBUG)
@@ -48,6 +49,19 @@ def load(data: Generator[JobPosting, None, None]) -> bool:
     engine.dispose()
 
     return True
+
+def retrieve(query: str) -> Iterator[tuple[Hashable, pd.Series]]:
+    '''Lorem ipsum'''
+
+    engine = sql.create_engine(SQLITECLOUD_CONNECTION_STRING)
+    connection = engine.connect()
+
+    data = pd.read_sql(query, connection).iterrows()
+
+    connection.close()
+    engine.dispose()
+
+    return data
 
 def stop_loop(iteration: int, limit: int) -> None:
     '''Stops the loop if the iteration count reaches the limit, i dont want infinite loops or waste all my OPENAI credits because of them.
