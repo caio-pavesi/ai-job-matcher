@@ -15,8 +15,8 @@ import requests as req
 from bs4 import BeautifulSoup as bs
 from bs4.element import Tag
 
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 URL = 'https://www.bmwgroup.jobs/en/_jcr_content/main/layoutcontainer_5337/jobfinder30.jobfinder_table.content.html?filterSearch=obType_INTERNSHIP,postingDate_7'
 
@@ -137,7 +137,7 @@ def transform(job_listing: Sequence[Tag]) -> Generator[JobPosting, None, None]:
 
         job_description_page = req.get(job_link, timeout = 60).content.decode('utf-8')
 
-        yield JobPosting(
+        job_posting = JobPosting(
             job_link = job_link,
             job_portal_id = get_job_portal_id(job_data),
             job_title = get_job_title(job_data),
@@ -147,6 +147,10 @@ def transform(job_listing: Sequence[Tag]) -> Generator[JobPosting, None, None]:
             job_field = get_job_field(job_data),
             job_city = get_job_city(job_data),
         )
+
+        logger.debug('Job posting created: %s', job_posting)
+
+        yield job_posting
 
 # Main
 def main():
