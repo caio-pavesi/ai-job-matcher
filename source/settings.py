@@ -14,3 +14,4 @@ BASE_DIR = Path(__file__).parent.parent.resolve()
 GITHUB_TOKEN = cast(str, config('GITHUB_TOKEN', default = None))
 OPENAI_API_KEY = cast(str, config('OPENAI_API_KEY', default = None))
 SQLITECLOUD_CONNECTION_STRING = cast(str, config('SQLITECLOUD_CONNECTION_STRING', default = None))
+APPLICATION_FILES_FOLDER_PATH = BASE_DIR / 'data'
