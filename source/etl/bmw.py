@@ -132,7 +132,7 @@ def transform(job_listing: Sequence[Tag]) -> Generator[JobPosting, None, None]:
         logger.info('Processing job link: %s', job_link)
 
         if already_inserted_in_database(job_link):
-            logger.debug('Job already inserted: %s', job_link)
+            logger.info('Job already inserted: %s', job_link)
             continue
 
         job_description_page = req.get(job_link, timeout = 60).content.decode('utf-8')
