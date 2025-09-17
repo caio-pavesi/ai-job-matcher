@@ -1,14 +1,18 @@
 '''Lorem ipsum dolor sit amet, consectetur adipiscing elit.'''
 
 # Standard
+import sqlite3
+from datetime import datetime
+from typing import cast
 
 # Project
 from etl.bmw import main as etl_bmw
-from utils import llm_match_function, retrieve
+from utils import llm_match_function, retrieve, stop_loop
 from settings import (
     OPENAI_API_KEY,
     BASE_DIR,
-    APPLICATION_FILES_FOLDER_PATH
+    APPLICATION_FILES_FOLDER_PATH,
+    DATABASE_PATH,
 )
 
 # External
@@ -18,7 +22,7 @@ from langchain_core.prompts.prompt import PromptTemplate
 from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader
 
 LLM = ChatOpenAI(
-    model="gpt-5",
+    model="gpt-5-nano",
     api_key=SecretStr(OPENAI_API_KEY),
 ).bind_tools([llm_match_function()], tool_choice="assess_candidate_fit")
 
@@ -31,6 +35,7 @@ PROMPT_TEMPLATE = PromptTemplate(
 APPLICATION_DOCS = DirectoryLoader(str(APPLICATION_FILES_FOLDER_PATH), glob="*.pdf", loader_cls=PyPDFLoader).load()
 
 FILTER_QUERY = (BASE_DIR / 'sql/filter.sql').read_text('utf-8')
+INSERT_QUERY = (BASE_DIR / 'sql/insert_match.sql').read_text('utf-8')
 
 # Match
 def do_match(job_description):
@@ -49,14 +54,24 @@ def main() -> None:
     '''Main entry point for the application.'''
 
     # ETL
-    # etl_bmw()
+    etl_bmw()
 
     # Do match based on criteria of filters
-    for job in retrieve(FILTER_QUERY):
-        a = do_match(job[1]['job_description'])
-        with open('response.json', 'w', encoding='utf-8') as f:
-            f.write(str(a.to_json()))
-        break
+    with sqlite3.connect(DATABASE_PATH, autocommit = True) as conn:
+
+        for idx, job in enumerate(retrieve(FILTER_QUERY)):
+            match = do_match(job[1]['job_description'])
+            match = cast(dict, match.tool_calls[0]['args'])
+
+            # Add missing parameters from job
+            match.update({'job_portal_id': job[1]['job_portal_id']})
+            match.update({'match_date': datetime.now().isoformat()})
+
+            # Insert into matches table
+            conn.execute(INSERT_QUERY, match)
+
+            # Nobody likes infinite loops, and wasted OpenAI credits
+            stop_loop(idx, 10)
 
 if __name__ == "__main__":
     main()
