@@ -143,6 +143,7 @@ def transform(job_listing: Sequence[Tag]) -> Generator[JobPosting, None, None]:
             job_title = get_job_title(job_data),
             job_description = get_job_description(job_description_page),
             job_posting_date = get_job_posting_date(job_data),
+            job_extraction_date = date.today(),
             job_type = get_job_type(job_data),
             job_field = get_job_field(job_data),
             job_city = get_job_city(job_data),

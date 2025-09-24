@@ -35,7 +35,7 @@ def load(data: Generator[JobPosting, None, None]) -> bool:
     '''Lorem ipsum'''
 
     with sqlite3.connect(DATABASE_PATH, autocommit = True) as conn:
-        query = '''INSERT INTO jobs (job_portal_id, job_link, job_title, job_description, job_posting_date, job_type, job_field, job_city) VALUES (:job_portal_id, :job_link, :job_title, :job_description, :job_posting_date, :job_type, :job_field, :job_city)'''
+        query = '''INSERT INTO jobs (job_portal_id, job_link, job_title, job_description, job_posting_date, job_extraction_date, job_type, job_field, job_city) VALUES (:job_portal_id, :job_link, :job_title, :job_description, :job_posting_date, :job_extraction_date, :job_type, :job_field, :job_city)'''
 
         for job in data:
             try:

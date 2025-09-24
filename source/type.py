@@ -11,6 +11,7 @@ class JobPosting:
     job_title: str
     job_description: str
     job_posting_date: date
+    job_extraction_date: date
     job_type: str
     job_field: str
     job_city: str
@@ -23,6 +24,7 @@ class JobPosting:
             'job_title': self.job_title,
             'job_description': self.job_description,
             'job_posting_date': self.job_posting_date.isoformat(),
+            'job_extraction_date': self.job_extraction_date.isoformat(),
             'job_type': self.job_type,
             'job_field': self.job_field,
             'job_city': self.job_city,
@@ -36,8 +38,8 @@ class JobPosting:
             self.job_title,
             self.job_description,
             self.job_posting_date.isoformat(),
+            self.job_extraction_date.isoformat(),
             self.job_type,
             self.job_field,
             self.job_city,
         )
-
