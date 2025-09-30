@@ -18,7 +18,7 @@ from bs4.element import Tag
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-URL = 'https://www.bmwgroup.jobs/en/_jcr_content/main/layoutcontainer_5337/jobfinder30.jobfinder_table.content.html?filterSearch=obType_INTERNSHIP,postingDate_7'
+URL = 'https://www.bmwgroup.jobs/en/_jcr_content/main/layoutcontainer_5337/jobfinder30.jobfinder_table.content.html'
 
 # Extract
 def extract() -> Sequence[Tag]:
