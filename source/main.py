@@ -27,7 +27,7 @@ LLM = ChatOpenAI(
 ).bind_tools([llm_match_function()], tool_choice="assess_candidate_fit")
 
 PROMPT_TEMPLATE = PromptTemplate(
-    template = (BASE_DIR / 'tools/match.jinja').read_text('utf-8'),
+    template = (BASE_DIR / 'tools/match.jinja.md').read_text('utf-8'),
     template_format = "jinja2",
     input_variables = ["candidate_application", "job_description"],
 )
