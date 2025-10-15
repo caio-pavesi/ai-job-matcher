@@ -79,7 +79,7 @@ Respond solely in this JSON format:
   "match_possible_interview": true
 }
 ```
-- All score values must be floats with two decimal points.
+- The score value must be the total of the scoring as a float with two decimal points.
 - Component scores in the output JSON must be numbers (not strings).
 - All non-score sections must be strings. The interview recommendation must be a boolean (true/false).
 
