@@ -2,7 +2,7 @@ requests==2.32.3
 pytest==8.4.0
 python-decouple==3.8
 pandas==2.3.0
-ipykernel==6.29.5
+ipykernel==7.0.1
 beautifulsoup4==4.13.4
 langchain==0.3.25
 langchain_openai==0.3.21
