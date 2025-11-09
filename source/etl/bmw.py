@@ -137,17 +137,21 @@ def transform(job_listing: Sequence[Tag]) -> Generator[JobPosting, None, None]:
 
         job_description_page = req.get(job_link, timeout = 60).content.decode('utf-8')
 
-        job_posting = JobPosting(
-            job_link = job_link,
-            job_portal_id = get_job_portal_id(job_data),
-            job_title = get_job_title(job_data),
-            job_description = get_job_description(job_description_page),
-            job_posting_date = get_job_posting_date(job_data),
-            job_extraction_date = date.today(),
-            job_type = get_job_type(job_data),
-            job_field = get_job_field(job_data),
-            job_city = get_job_city(job_data),
-        )
+        try:
+            job_posting = JobPosting(
+                job_link = job_link,
+                job_portal_id = get_job_portal_id(job_data),
+                job_title = get_job_title(job_data),
+                job_description = get_job_description(job_description_page),
+                job_posting_date = get_job_posting_date(job_data),
+                job_extraction_date = date.today(),
+                job_type = get_job_type(job_data),
+                job_field = get_job_field(job_data),
+                job_city = get_job_city(job_data),
+            )
+        except Exception as exception:
+            logger.error('Error processing job link %s', job_link, exc_info=exception)
+            continue
 
         logger.debug('Job posting created: %s', job_posting)
 
